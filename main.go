@@ -5,22 +5,36 @@ import (
 	"math/rand"
 )
 
-const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-_?"
+var letterBytes string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
 
 func main() {
+	array := []string{}
 	var inputnumber int
 	var passwordLength int
-	println("Enter --count-- of passwords:")
+	var starElement string
+	println("Enter the number of password examples:")
 	fmt.Scan(&inputnumber)
-	println("Enter --length-- of password:")
+	println("Enter the number of characters in the password:")
 	fmt.Scan(&passwordLength)
-	array := []string{}
-	for i := 0; i < inputnumber; i++ {
-		array = append(array, RandStringBytes(passwordLength))
+	println("Do you need '* | - | _ | = | ?' sibdols in you password? Y|N")
+	fmt.Scan(&starElement)
+	if starElement == "N" {
+		for i := 0; i < inputnumber; i++ {
+			array = append(array, RandStringBytes(passwordLength))
+		}
+		for i := 0; i < len(array); i++ {
+			fmt.Println(array[i], "\n-----------------")
+		}
+	} else {
+		letterBytes += "*-_=?"
+		for i := 0; i < inputnumber; i++ {
+			array = append(array, RandStringBytes(passwordLength))
+		}
+		for i := 0; i < len(array); i++ {
+			fmt.Println(array[i], "\n-----------------")
+		}
 	}
-	for i := 0; i < len(array); i++ {
-		fmt.Println(array[i])
-	}
+	println("✅✅✅✅")
 
 }
 
